@@ -1,0 +1,13 @@
+Darth_Vader
+Luke_Skywalker
+Han_Solo
+Leia
+Yoda
+R2D2
+Chewbacca
+Boba_Fett
+Jango_Fett
+Darth_Sidious
+Palpatine
+Mace_Windu
+Darth_Maul
