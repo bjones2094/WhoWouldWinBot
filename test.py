@@ -73,7 +73,8 @@ class Bot:
 				comment_text += link + "\n\n"
 			comment_text += "---\n\n"
 			
-		comment_text += "Was this bot helpful? Please leave a reply, or message /u/BJ2094 [Here](http://www.reddit.com/message/compose/?to=BJ2094)"
+		comment_text += "Was this bot helpful? Please leave a reply, or message /u/BJ2094 [Here](http://www.reddit.com/message/compose/?to=BJ2094)\n\n"
+		comment_text += "[Source Code](https://github.com/bjones2094/WhoWouldWinBot)"
 			
 		post.add_comment(comment_text)
 		
@@ -85,7 +86,8 @@ class Bot:
 				comment_text += link + "\n\n"
 			comment_text += "---\n\n"
 			
-		comment_text += "Hey, I can read comments now! Was this bot helpful? Please leave a reply, or message /u/BJ2094 [Here](http://www.reddit.com/message/compose/?to=BJ2094)"
+		comment_text += "Hey, I can read comments now! Was this bot helpful? Please leave a reply, or message /u/BJ2094 [Here](http://www.reddit.com/message/compose/?to=BJ2094)\n\n"
+		comment_text += "[Source Code](https://github.com/bjones2094/WhoWouldWinBot)"
 			
 		comment.reply(comment_text)
 		
