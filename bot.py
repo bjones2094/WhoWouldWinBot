@@ -168,9 +168,9 @@ class Bot:
 	def run(self):
 		self.login("WhoWouldWinBot", self.password)
 		
-		#new_posts = self.subreddit.get_new(limit = 10)
+		new_posts = self.subreddit.get_new(limit = 10)
 		
-		#self.search_titles(new_posts)
+		self.search_titles(new_posts)
 		
 		hot_posts = self.subreddit.get_hot(limit = 10)
 		new_posts = self.subreddit.get_new(limit = 25)
