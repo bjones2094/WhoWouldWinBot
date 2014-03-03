@@ -1,3 +1,9 @@
+""" 
+	WhoWouldWinBot identifies character names from the posts in the whowouldwin subreddit
+	and posts appropriate links to provide character info.
+	Author: Brian Jones
+"""
+
 import praw
 import time
 import sys
@@ -74,6 +80,8 @@ class Bot:
 	def login(self, name, password):
 		self.r.login(name, password)
 		
+	# Posts reply after searching titles
+		
 	def make_post(self, post):
 		comment_text = ""
 		for char in self.found_characters:
@@ -86,6 +94,8 @@ class Bot:
 		comment_text += "[Source Code](https://github.com/bjones2094/WhoWouldWinBot)"
 			
 		post.add_comment(comment_text)
+		
+	# Posts a reply to comment calling bot when character is found
 		
 	def make_success_reply(self, comment):
 		comment_text = ""
@@ -100,18 +110,22 @@ class Bot:
 			
 		comment.reply(comment_text)
 		
+	# Posts a reply to comment calling bot when character is not found
+		
 	def make_negative_reply(self, comment):
 		comment.reply("Sorry, I couldn't find the character(s) you were looking for. I have failed you :(")
 		
+	# Searches titles using is_subsequence method
+		
 	def search_titles(self, posts):
-		used_ids = open("used_post_ids.txt", 'r').read()
+		used_ids = open("used_post_ids.txt", 'r').read()	# Uses used_post_ids.txt to store and check used post ids so as not to reply to the same post twice
 		id_output = open("used_post_ids.txt", 'a')
 		
 		for post in posts:
 			self.found_characters = []
 			post_title = post.title.encode('utf-8')
 			
-			if post.id not in used_ids:
+			if post.id not in used_ids:		# Checks the used post ids
 				id_output.write(post.id + ' ' + post_title + '\n')
 				
 				self.find_wiki_links(post_title)
@@ -124,8 +138,10 @@ class Bot:
 			
 		id_output.close()
 		
+	# Searches comments using is_subsequence method
+		
 	def search_comments(self, posts):
-		used_ids = open("used_comment_ids.txt", 'r').read()
+		used_ids = open("used_comment_ids.txt", 'r').read()		# Uses used_comment_ids.txt to store and check used comment ids so as not to reply to the same comment twice
 		id_output = open("used_comment_ids.txt", 'a')
 		
 		prompt1 = "/u/whowouldwinbot who is"
@@ -165,6 +181,8 @@ class Bot:
 							
 		id_output.close()
 		
+	# Run method does all of the bot's searching and posting
+		
 	def run(self):
 		self.login("WhoWouldWinBot", self.password)
 		
@@ -179,6 +197,8 @@ class Bot:
 		self.search_comments(new_posts)
 		print "Searching hot posts\n"
 		self.search_comments(hot_posts)
+	
+	# Finds links from wiki sites and appends them to found characters list
 	
 	def find_wiki_links(self, title):
 		for i in range(0, 4):
@@ -231,7 +251,9 @@ class Bot:
 					
 					if not name_is_found:
 						self.found_characters.append(new_character)
-					
+		
+	# Finds links from OBD and appends them to found characters list
+		
 	def find_OBD_links(self, title):
 		for i in range(0, 4):
 			if i == 0:
@@ -283,12 +305,14 @@ class Bot:
 					
 					if not name_is_found:
 						self.found_characters.append(new_character)
-						
+		
+	# Displays characters bot finds (used mostly in testing)
+		
 	def display_characters(self):
 		for char in self.found_characters:
 			char.display()
 	
-bot = Bot(sys.argv[1])
+bot = Bot(sys.argv[1])	# Bot password must be passed as first parameter
 
 count = 0
 
